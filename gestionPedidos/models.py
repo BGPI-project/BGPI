@@ -7,6 +7,7 @@ from enum import Enum
 from django.contrib.auth.models import User
 # Create your models here.
 
+#prueba
 class Component(models.Model):
     name=models.CharField(max_length=30)
     description=models.CharField(max_length=200)
