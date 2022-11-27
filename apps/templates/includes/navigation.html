@@ -18,6 +18,23 @@
             <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0" id="navigation">
               <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
                 <li class="nav-item dropdown dropdown-hover mx-2">
+                  
+                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                  method="POST">
+                    {% csrf_token %}
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{ request.POST.buscar }}">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                          <i class="fas fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </li>
+
+
+                <li class="nav-item dropdown dropdown-hover mx-2">
                   <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
                     Pages
                     <img src="{{ ASSETS_ROOT }}/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1">

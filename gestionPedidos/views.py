@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from django.db.models import Q
 # Create your views here.
 
 
@@ -12,3 +13,19 @@ def showCart(request):
     
 
     return render(request, 'cart.html', {'cart': cart, 'component': component, 'ls':ls})
+
+
+def list_products(request):
+    busqueda=request.POST.get("buscar")
+    products= Component.objects.all()
+
+    if busqueda:
+        products=Component.objects.filter(
+             Q(name__icontains = busqueda) | 
+            Q(type_component__icontains = busqueda) 
+        ).distinct()
+    
+    return render (request,'navigation.html',{'products':products})
+
+
+     
