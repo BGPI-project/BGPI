@@ -12,3 +12,8 @@ def showCart(request):
     
 
     return render(request, 'cart.html', {'cart': cart, 'component': component, 'ls':ls})
+
+def index(request):
+    
+
+    return render(request, 'index.html')
