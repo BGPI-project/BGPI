@@ -9,7 +9,9 @@ from .views import *
 urlpatterns = [
 
     # The home page
-    path('', showCart, name='Cart'),
+    path('cart/', showCart, name='Cart'),
+
+    path('', index, name='index'),
 
 
 
