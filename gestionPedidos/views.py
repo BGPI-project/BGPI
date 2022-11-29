@@ -14,7 +14,17 @@ def showCart(request):
     componentsInCart = ComponentsInCart.objects.all()
     bikesInCart = BikesInCart.objects.all()
 
-    return render(request, 'pages/cart.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart})
+    totalPriceComponent = 0
+    totalPriceBike = 0
+    for componentInCart in componentsInCart:
+        totalPriceComponent += componentInCart.component.precio
+
+    for bikeInCart in bikesInCart:
+        totalPriceBike += bikeInCart.bike.precio
+
+    total = totalPriceComponent + totalPriceBike
+
+    return render(request, 'pages/cart.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': totalPriceBike})
 
 
 
