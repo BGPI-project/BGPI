@@ -1,6 +1,35 @@
-{% for c in component %}
+{% extends 'layouts/pedidosBase.html' %}
 
-<p>{{c}}</p>
+{% block title %} Cart {% endblock title %}
+
+
+{% block body_class %} index-page {% endblock body_class %}
+
+
+{% block contentTitle %} Cart {% endblock contentTitle %}
+
+{% block content %}
+
+{% for bikeInCart in bikesInCart %}
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src={{bikeInCart.bike.image.url}} class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{bikeInCart.bike.name}}</h5>
+          <p class="card-text">Cantidad</p>
+          {{bikeInCart.bike.image.url}}
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endfor %}
 
+
+
+
+{% endblock content %}
