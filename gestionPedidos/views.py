@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django import template
 from django.contrib.auth.decorators import login_required
@@ -49,6 +49,7 @@ def pages(request):
         html_template = loader.get_template('pages/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
+@login_required
 def configureBike(request):
     msg = None
 
@@ -95,7 +96,7 @@ def configureBike(request):
             component5 = ComponentBike(bike=bici, component=camara)
             component5.save()
 
-            # return redirect("/login/")
+            return redirect("/cart/")
 
         else:
             msg = 'Form is not valid'
