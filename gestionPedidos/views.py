@@ -97,6 +97,16 @@ def configureBike(request):
             component5 = ComponentBike(bike=bici, component=camara)
             component5.save()
 
+            cart = Cart.objects.filter(user=request.user)
+            bikeInCart = BikesInCart(cart=cart[0], bike=bici)
+
+            if not cart.exists():
+                cart = Cart(user=request.user)
+                cart.save()
+                bikeInCart = BikesInCart(cart=cart, bike=bici)
+
+            bikeInCart.save()
+
             return redirect("/cart/")
 
         else:
