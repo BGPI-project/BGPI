@@ -10,6 +10,7 @@ urlpatterns = [
 
     # The home page
     path('cart/', showCart, name='Cart'),
+    path('configureBike/', configureBike, name='ConfigureBike'),
 
     path('', index, name='index'),
 
