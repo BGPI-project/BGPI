@@ -10,13 +10,14 @@ from django.urls import reverse
 
 def showCart(request):
 
-    cart = Cart.objects.all()
-    component = Component.objects.all()
-    ls = [1,2,3,4,5]
 
-    
+    componentsInCart = ComponentsInCart.objects.all()
+    bikesInCart = BikesInCart.objects.all()
 
-    return render(request, 'pages/cart.html', {'cart': cart, 'component': component, 'ls':ls})
+    return render(request, 'pages/cart.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart})
+
+
+
 @login_required
 def index(request):
     usuario=request.user
