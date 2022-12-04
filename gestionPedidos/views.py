@@ -61,13 +61,13 @@ def configureBike(request):
     camaras = Component.objects.filter(type_component="CR")
 
     diccionario = {
-            "msg": msg,
-            "cuadros": cuadros,
-            "manillares": manillares,
-            "sillines": sillines,
-            "ruedas": ruedas,
-            "camaras": camaras
-        }
+        "msg": msg,
+        "cuadros": cuadros,
+        "manillares": manillares,
+        "sillines": sillines,
+        "ruedas": ruedas,
+        "camaras": camaras
+    }
 
     if request.method == "POST":
         form = forms.Form(request.POST)
@@ -98,14 +98,69 @@ def configureBike(request):
             component5.save()
 
             cart = Cart.objects.filter(user=request.user)
-            bikeInCart = BikesInCart(cart=cart[0], bike=bici)
 
             if not cart.exists():
                 cart = Cart(user=request.user)
                 cart.save()
                 bikeInCart = BikesInCart(cart=cart, bike=bici)
+            else:
+                bikeInCart = BikesInCart(cart=cart[0], bike=bici)
 
             bikeInCart.save()
+
+            return redirect("/cart/")
+
+        else:
+            msg = 'Form is not valid'
+
+    return render(request, "pages/configureBike.html", diccionario)
+
+@login_required
+def editBike(request, bike_id):
+    msg = None
+
+    cuadros = Component.objects.filter(type_component="CB")
+    manillares = Component.objects.filter(type_component="MN")
+    sillines = Component.objects.filter(type_component="SL")
+    ruedas = Component.objects.filter(type_component="RD")
+    camaras = Component.objects.filter(type_component="CR")
+
+    diccionario = {
+        "bike_id": bike_id,
+        "msg": msg,
+        "cuadros": cuadros,
+        "manillares": manillares,
+        "sillines": sillines,
+        "ruedas": ruedas,
+        "camaras": camaras
+    }
+
+    if request.method == "GET":
+        bike = Bike.objects.filter(id=bike_id)
+        if not bike.exists():
+            return redirect("/configureBike/")
+
+
+    if request.method == "POST":
+        form = forms.Form(request.POST)
+        if form.is_valid():
+            nombre = request.POST['nombre']
+            cuadro = Component.objects.get(pk=request.POST['cuadro'])
+            manillar = Component.objects.get(pk=request.POST['manillar'])
+            sillin = Component.objects.get(pk=request.POST['sillin'])
+            rueda = Component.objects.get(pk=request.POST['rueda'])
+            camara = Component.objects.get(pk=request.POST['camara'])
+
+            bike = Bike.objects.filter(id=bike_id)[0]
+            bike.name = nombre
+            bike.save()
+
+            newComponents = [cuadro, manillar, sillin, rueda, camara]
+            oldComponents = ComponentBike.objects.filter(bike=bike)
+            for i in range(0,5):
+                componentToSave = oldComponents[i]
+                componentToSave.component = newComponents[i]
+                componentToSave.save()
 
             return redirect("/cart/")
 
