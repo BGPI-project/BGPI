@@ -80,6 +80,7 @@ def configureBike(request):
             camara = Component.objects.get(pk=request.POST['camara'])
 
             bici = Bike(name=nombre)
+            bici.precio = cuadro.precio + manillar.precio + sillin.precio + rueda.precio + camara.precio
             bici.save()
 
             component1 = ComponentBike(bike=bici, component=cuadro)
@@ -127,6 +128,7 @@ def editBike(request, bike_id):
 
     diccionario = {
         "bike_id": bike_id,
+        "edit_mode": True,
         "msg": msg,
         "cuadros": cuadros,
         "manillares": manillares,
@@ -139,8 +141,22 @@ def editBike(request, bike_id):
         bike = Bike.objects.filter(id=bike_id)
         if not bike.exists():
             return redirect("/configureBike/")
+        
+        diccionario.update({"name": bike[0].name})
 
-
+        oldComponents = ComponentBike.objects.filter(bike=bike[0])
+        for oldComponent in oldComponents:
+            if oldComponent.component.type_component == "SL":
+                diccionario.update({"sillin": oldComponent.component.id})
+            elif oldComponent.component.type_component == "RD":
+                diccionario.update({"rueda": oldComponent.component.id})
+            elif oldComponent.component.type_component == "MN":
+                diccionario.update({"manillar": oldComponent.component.id})
+            elif oldComponent.component.type_component == "CR":
+                diccionario.update({"camara": oldComponent.component.id})
+            elif oldComponent.component.type_component == "CB":
+                diccionario.update({"cuadro": oldComponent.component.id})
+            
     if request.method == "POST":
         form = forms.Form(request.POST)
         if form.is_valid():
@@ -153,6 +169,7 @@ def editBike(request, bike_id):
 
             bike = Bike.objects.filter(id=bike_id)[0]
             bike.name = nombre
+            bike.precio = cuadro.precio + manillar.precio + sillin.precio + rueda.precio + camara.precio
             bike.save()
 
             newComponents = [cuadro, manillar, sillin, rueda, camara]
