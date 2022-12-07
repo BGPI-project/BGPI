@@ -6,15 +6,28 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from gestionPedidos.models import Component
+from decouple import config
+import stripe
+
+stripe.api_key = config("STRIPE_SECRET_KEY")
+
 # Create your views here.
 
 from django import forms
 
+login_required
 def showCart(request):
 
-
-    componentsInCart = ComponentsInCart.objects.all()
-    bikesInCart = BikesInCart.objects.all()
+    cart = Cart.objects.filter(user=request.user)
+    
+    if not cart.exists():
+        cart = Cart(user=request.user)
+        cart.save()
+        componentsInCart = ComponentsInCart.objects.filter(cart=cart)
+        bikesInCart = BikesInCart.objects.filter(cart=cart)
+    else:
+        componentsInCart = ComponentsInCart.objects.filter(cart=cart[0])
+        bikesInCart = BikesInCart.objects.filter(cart=cart[0])
 
     return render(request, 'pages/cart.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart})
 
@@ -80,6 +93,7 @@ def configureBike(request):
             camara = Component.objects.get(pk=request.POST['camara'])
 
             bici = Bike(name=nombre)
+            bici.precio = cuadro.precio + manillar.precio + sillin.precio + rueda.precio + camara.precio
             bici.save()
 
             component1 = ComponentBike(bike=bici, component=cuadro)
@@ -127,6 +141,7 @@ def editBike(request, bike_id):
 
     diccionario = {
         "bike_id": bike_id,
+        "edit_mode": True,
         "msg": msg,
         "cuadros": cuadros,
         "manillares": manillares,
@@ -139,8 +154,22 @@ def editBike(request, bike_id):
         bike = Bike.objects.filter(id=bike_id)
         if not bike.exists():
             return redirect("/configureBike/")
+        
+        diccionario.update({"name": bike[0].name})
 
-
+        oldComponents = ComponentBike.objects.filter(bike=bike[0])
+        for oldComponent in oldComponents:
+            if oldComponent.component.type_component == "SL":
+                diccionario.update({"sillin": oldComponent.component.id})
+            elif oldComponent.component.type_component == "RD":
+                diccionario.update({"rueda": oldComponent.component.id})
+            elif oldComponent.component.type_component == "MN":
+                diccionario.update({"manillar": oldComponent.component.id})
+            elif oldComponent.component.type_component == "CR":
+                diccionario.update({"camara": oldComponent.component.id})
+            elif oldComponent.component.type_component == "CB":
+                diccionario.update({"cuadro": oldComponent.component.id})
+            
     if request.method == "POST":
         form = forms.Form(request.POST)
         if form.is_valid():
@@ -153,6 +182,7 @@ def editBike(request, bike_id):
 
             bike = Bike.objects.filter(id=bike_id)[0]
             bike.name = nombre
+            bike.precio = cuadro.precio + manillar.precio + sillin.precio + rueda.precio + camara.precio
             bike.save()
 
             newComponents = [cuadro, manillar, sillin, rueda, camara]
@@ -168,3 +198,41 @@ def editBike(request, bike_id):
             msg = 'Form is not valid'
 
     return render(request, "pages/configureBike.html", diccionario)
+
+def checkout(request):
+    token = request.POST['stripeToken']
+
+    try:
+        charge = stripe.Charge.create(
+            amount=1000,
+            currency='EUR',
+            description='Example charge',
+            source=token,
+        )
+    except stripe.error.CardError as e:
+        # Since it's a decline, stripe.error.CardError will be caught
+        body = e.json_body
+        err = body.get('error', {})
+        print("Status is: %s" % e.http_status)
+        print("Type is: %s" % err.get('type'))
+        print("Code is: %s" % err.get('code'))
+        # param is '' in this case
+        print("Param is: %s" % err.get('param'))
+        print("Message is: %s" % err.get('message'))
+        return HttpResponse(status=e.http_status)
+    except stripe.error.RateLimitError as e:
+        # Too many requests made to the API too quickly
+        return HttpResponse(status=e.http_status)
+    except stripe.error.InvalidRequestError as e:
+        # Invalid parameters were supplied to Stripe's API
+        return HttpResponse(status=e.http_status)
+    except stripe.error.AuthenticationError as e:
+        # Authentication with Stripe's API failed
+        # (maybe you changed API keys recently)
+        return HttpResponse(status=e.http_status)
+    except stripe.error.APIConnectionError as e:
+        # Network communication with Stripe failed
+        return HttpResponse(status=e.http_status)
+    except stripe.error.StripeError as e:
+        # Display a very generic error
+        return HttpResponse(status=e.http_status)

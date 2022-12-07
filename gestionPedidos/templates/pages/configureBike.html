@@ -74,3 +74,23 @@
 </form>
 
 {% endblock content %}
+
+{% block javascripts %}
+<script>
+  if ("{{ edit_mode }}" == "True") {
+    const nombre = '{{ name }}'
+    const sillin = '{{ sillin }}';
+    const rueda = '{{ rueda }}';
+    const manillar = '{{ manillar }}';
+    const camara = '{{ camara }}';
+    const cuadro = '{{ cuadro }}';
+
+    document.getElementById("nombre").value = nombre;
+    document.getElementById(sillin).checked = true;
+    document.getElementById(rueda).checked = true;
+    document.getElementById(manillar).checked = true;
+    document.getElementById(camara).checked = true;
+    document.getElementById(cuadro).checked = true;
+  }
+</script>
+{% endblock javascripts %}
