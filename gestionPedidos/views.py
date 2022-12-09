@@ -152,7 +152,6 @@ def configureBike(request):
             component5.save()
 
             cart = Cart.objects.filter(user=request.user)
-
             if not cart.exists():
                 cart = Cart(user=request.user)
                 cart.save()
@@ -276,3 +275,37 @@ def checkout(request):
     except stripe.error.StripeError as e:
         # Display a very generic error
         return HttpResponse(status=e.http_status)
+
+@login_required
+def inventory(request):
+    msg = None
+
+    cuadros = Component.objects.filter(type_component="CB")
+    manillares = Component.objects.filter(type_component="MN")
+    sillines = Component.objects.filter(type_component="SL")
+    ruedas = Component.objects.filter(type_component="RD")
+    camaras = Component.objects.filter(type_component="CR")
+
+    diccionario = {
+        "msg": msg,
+        "cuadros": cuadros,
+        "manillares": manillares,
+        "sillines": sillines,
+        "ruedas": ruedas,
+        "camaras": camaras
+    }
+
+    if request.method == "POST":
+        form = InventoryForm(request.POST)
+        if form.is_valid():
+            cart = Cart.objects.filter(user=request.user)
+            if not cart.exists():
+                cart = Cart(user=request.user)
+                cart.save()
+            
+            for componentForm in form.cleaned_data['componentes']:
+                componentInCart = ComponentsInCart(cart=cart[0], component=componentForm)
+                componentInCart.save()
+
+            return redirect("/cart/")
+    return render(request, "pages/inventory.html", diccionario)
