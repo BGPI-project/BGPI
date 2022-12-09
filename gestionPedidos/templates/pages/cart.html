@@ -1,5 +1,6 @@
 {% extends 'layouts/pedidosBase.html' %}
 
+
 {% block title %} Cart {% endblock title %}
 
 
@@ -14,8 +15,8 @@
 
 <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
-      <div class="col-md-4">
-        <img src={{bikeInCart.bike.image.url}} class="img-fluid rounded-start" alt="...">
+      <div class="col-md-4" style="margin: auto;">
+        <img src={{bikeInCart.bike.image}} class="img-fluid rounded-start">
       </div>
       <div class="col-md-8">
         <div class="card-body text-left">
@@ -28,11 +29,83 @@
         </div>
       </div>
     </div>
-  </div>
+    
+</div>
+
+
+{% endfor %}
+
+{% for componentInCart in componentsInCart %}
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4" style="margin: auto;">
+        <img src={{componentInCart.component.image}} class="img-fluid rounded-start">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body text-left">
+          <h5 class="card-title">{{componentInCart.component.name}}</h5>
+          <p class="card-text">Cantidad</p>
+          <p class="card-text">Precio: {{componentInCart.component.precio}} €</p>
+          <a href="/configureBike/{{ bikeInCart.bike.id }}/">
+            <button name="edit" type="button" class="btn btn-sm bg-gradient-secondary">Edit</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
 
 {% endfor %}
 
 
+
+<div class="card position-absolute top-50 end-0 translate-middle-y me-12" style="width: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">Pedidos</h5>
+    {% for bikeInCart in bikesInCart %}
+
+      <!-- <div class="start-0 translate-middle-y">
+        <p class="card-text" style="text-align: start;">{{bikeInCart.bike.name}}</p>
+      </div>
+      <div class="end-0 translate-middle-y">
+        <p class="card-text" style="text-align: start;"> {{bikeInCart.bike.precio}}€</p>
+      </div> -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6" style="text-align: start;">{{bikeInCart.bike.name}}</div>
+        <div class="col-6" style="text-align: end;">{{bikeInCart.bike.precio}}€</div>
+      </div>
+    </div>
+
+
+
+    {% endfor %}
+
+    {% for componentInCart in componentsInCart %}
+    <div class="container">
+      <div class="row">
+        <div class="col-6" style="text-align: start;">{{componentInCart.component.name}}</div>
+        <div class="col-6" style="text-align: end;">{{componentInCart.component.precio}}€</div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-6" style="text-align: start;">Total</div>
+
+        <div class="col-6" style="text-align: end;">{{precioTotal}}</div>
+      </div>
+    </div>
+    <br>
+
+    <a href="buy" class="btn btn-primary">Pagar</a>
+  </div>
+</div>
 
 
 {% endblock content %}

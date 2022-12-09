@@ -5,6 +5,8 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.urls import path, re_path
 from .views import *
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
 
@@ -14,7 +16,10 @@ urlpatterns = [
     path('configureBike/<int:bike_id>/', editBike, name='editBike'),
     path('checkout/', checkout, name='checkout'),
     path('inventory/', inventory, name='inventory'),
+    path('cart/buy', buy, name='buy'),
 
     path('', index, name='index'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
