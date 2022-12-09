@@ -41,7 +41,7 @@ class Component(models.Model):
 class Bike(models.Model):
     name=models.CharField(max_length=30)
     precio=models.DecimalField(max_digits=7, decimal_places=2, default=0)
-    image = models.ImageField(upload_to='media/photos', null=True)
+    #image = models.ImageField(upload_to='media/photos', null=True)
 
     
 

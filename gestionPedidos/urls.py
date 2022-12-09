@@ -11,6 +11,8 @@ urlpatterns = [
     # The home page
     path('cart/', showCart, name='Cart'),
     path('configureBike/', configureBike, name='ConfigureBike'),
+    path('configureBike/<int:bike_id>/', editBike, name='editBike'),
+    path('checkout/', checkout, name='checkout'),
 
     path('', index, name='index'),
 

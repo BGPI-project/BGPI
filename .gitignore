@@ -8,7 +8,7 @@ __pycache__/
 
 # database & logs
 *.db
-*.sqlite3
+#*.sqlite3
 *.log
 
 # venv
@@ -29,3 +29,5 @@ apps/static/assets/node_modules
 apps/static/assets/yarn.lock
 apps/static/assets/.temp
 
+# Secrets
+.env

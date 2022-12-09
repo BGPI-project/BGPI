@@ -18,10 +18,13 @@
         <img src={{bikeInCart.bike.image.url}} class="img-fluid rounded-start" alt="...">
       </div>
       <div class="col-md-8">
-        <div class="card-body">
+        <div class="card-body text-left">
           <h5 class="card-title">{{bikeInCart.bike.name}}</h5>
           <p class="card-text">Cantidad</p>
-          {{bikeInCart.bike.image.url}}
+          <p class="card-text">Precio: {{bikeInCart.bike.precio}} €</p>
+          <a href="/configureBike/{{ bikeInCart.bike.id }}/">
+            <button name="edit" type="button" class="btn btn-sm bg-gradient-secondary">Edit</button>
+          </a>
         </div>
       </div>
     </div>
