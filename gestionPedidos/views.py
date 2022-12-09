@@ -31,17 +31,47 @@ def showCart(request):
 
     totalPriceComponent = 0
     totalPriceBike = 0
+
     for componentInCart in componentsInCart:
         totalPriceComponent += componentInCart.component.precio
 
     for bikeInCart in bikesInCart:
         totalPriceBike += bikeInCart.bike.precio
 
+
+    print(totalPriceComponent)
+    print(totalPriceBike)
+    total = totalPriceComponent + totalPriceBike
+    
+
+    return render(request, 'pages/cart.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': total})
+
+
+def buy(request):
+    cart = Cart.objects.filter(user=request.user)
+    
+    if not cart.exists():
+        cart = Cart(user=request.user)
+        cart.save()
+        componentsInCart = ComponentsInCart.objects.filter(cart=cart)
+        bikesInCart = BikesInCart.objects.filter(cart=cart)
+    else:
+        componentsInCart = ComponentsInCart.objects.filter(cart=cart[0])
+        bikesInCart = BikesInCart.objects.filter(cart=cart[0])
+
+    totalPriceComponent = 0
+    totalPriceBike = 0
+
+    for componentInCart in componentsInCart:
+        totalPriceComponent += componentInCart.component.precio
+
+    for bikeInCart in bikesInCart:
+        totalPriceBike += bikeInCart.bike.precio
     total = totalPriceComponent + totalPriceBike
 
-    return render(request, 'pages/cart.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': totalPriceBike})
 
 
+    return render(request, 'pages/buy.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': total});
 
 @login_required
 def index(request):

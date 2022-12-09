@@ -35,7 +35,33 @@
 
 {% endfor %}
 
-<div class="card position-absolute top-50 end-0 translate-middle-y" style="width: 20rem; margin-right: 15px;">
+{% for componentInCart in componentsInCart %}
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4" style="margin: auto;">
+        <img src={{componentInCart.component.image}} class="img-fluid rounded-start">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body text-left">
+          <h5 class="card-title">{{componentInCart.component.name}}</h5>
+          <p class="card-text">Cantidad</p>
+          <p class="card-text">Precio: {{componentInCart.component.precio}} €</p>
+          <a href="/configureBike/{{ bikeInCart.bike.id }}/">
+            <button name="edit" type="button" class="btn btn-sm bg-gradient-secondary">Edit</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
+
+{% endfor %}
+
+
+
+<div class="card position-absolute top-50 end-0 translate-middle-y me-12" style="width: 20rem;">
   <div class="card-body">
     <h5 class="card-title">Pedidos</h5>
     {% for bikeInCart in bikesInCart %}
@@ -57,6 +83,16 @@
 
 
     {% endfor %}
+
+    {% for componentInCart in componentsInCart %}
+    <div class="container">
+      <div class="row">
+        <div class="col-6" style="text-align: start;">{{componentInCart.component.name}}</div>
+        <div class="col-6" style="text-align: end;">{{componentInCart.component.precio}}€</div>
+      </div>
+    </div>
+    {% endfor %}
+
     <br>
     <div class="container">
       <div class="row">
@@ -67,7 +103,7 @@
     </div>
     <br>
 
-    <a href="#" class="btn btn-primary">Pagar</a>
+    <a href="buy" class="btn btn-primary">Pagar</a>
   </div>
 </div>
 

@@ -15,6 +15,7 @@ urlpatterns = [
     path('configureBike/', configureBike, name='ConfigureBike'),
     path('configureBike/<int:bike_id>/', editBike, name='editBike'),
     path('checkout/', checkout, name='checkout'),
+    path('cart/buy', buy, name='buy'),
 
     path('', index, name='index'),
 
