@@ -1,7 +1,7 @@
 
 
 from django.db import models
-
+from django import forms
 
 from enum import Enum
 from django.contrib.auth.models import User
@@ -77,3 +77,9 @@ class ComponentsInCart(models.Model):
 class BikesInCart(models.Model):
     cart=models.ForeignKey(Cart,on_delete=models.CASCADE)
     bike=models.ForeignKey(Bike,on_delete=models.CASCADE)
+
+class InventoryForm(forms.Form):
+    componentes = forms.ModelMultipleChoiceField(
+        queryset = Component.objects.all(), # not optional, use .all() if unsure
+        widget  = forms.CheckboxSelectMultiple,
+    )
