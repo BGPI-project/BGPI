@@ -24,8 +24,12 @@
           <p class="card-text">Cantidad</p>
           <p class="card-text">Precio: {{bikeInCart.bike.precio}} €</p>
           <a href="/configureBike/{{ bikeInCart.bike.id }}/">
-            <button name="edit" type="button" class="btn btn-sm bg-gradient-secondary">Edit</button>
+            <button name="edit" type="button" class="btn btn-sm bg-gradient-primary">Edit</button>
           </a>
+          <a href="/deleteBike/{{ bikeInCart.bike.id }}/">
+            <button name="delete" type="button" class="btn btn-sm bg-gradient-secondary">Delete</button>
+          </a>
+
         </div>
       </div>
     </div>

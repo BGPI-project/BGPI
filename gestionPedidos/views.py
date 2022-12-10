@@ -309,3 +309,11 @@ def inventory(request):
 
             return redirect("/cart/")
     return render(request, "pages/inventory.html", diccionario)
+
+def deleteBike(request, bike_id):
+    for tabla in ComponentBike.objects.filter(bike = Bike.objects.get(id=bike_id)):
+        tabla.delete()
+    BikesInCart.objects.get(bike = Bike.objects.get(id=bike_id)).delete()
+    Bike.objects.get(id=bike_id).delete()
+    return redirect("/cart/")
+        
