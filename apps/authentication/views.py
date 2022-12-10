@@ -7,6 +7,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
+from gestionPedidos.models import Cart
 
 
 def login_view(request):
@@ -42,11 +43,12 @@ def register_user(request):
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
-
+            cart = Cart(user=user)
+            cart.save()
             msg = 'User created - please <a href="/login">login</a>.'
             success = True
 
-            # return redirect("/login/")
+            return redirect("/login/")
 
         else:
             msg = 'Form is not valid'
