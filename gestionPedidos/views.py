@@ -15,7 +15,7 @@ stripe.api_key = config("STRIPE_SECRET_KEY")
 
 from django import forms
 
-login_required
+@login_required
 def showCart(request):
 
     cart = Cart.objects.filter(user=request.user)
