@@ -4,11 +4,15 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 import os, environ
+from decouple import config
 
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True)
 )
+
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))

@@ -3,7 +3,7 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
@@ -18,6 +18,7 @@ urlpatterns = [
     path('inventory/', inventory, name='inventory'),
     path('cart/buy', buy, name='buy'),
     path('deleteBike/<int:bike_id>/', deleteBike, name='deleteBike'),
+    path('payments/', include('Payments.urls'), name='stripe'),
 
     path('', index, name='index'),
 
