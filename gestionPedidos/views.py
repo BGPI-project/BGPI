@@ -316,4 +316,8 @@ def deleteBike(request, bike_id):
     BikesInCart.objects.get(bike = Bike.objects.get(id=bike_id)).delete()
     Bike.objects.get(id=bike_id).delete()
     return redirect("/cart/")
+
+def deleteComponent(request, component_id):
+    ComponentsInCart.objects.get(component = Component.objects.get(id=component_id)).delete()
+    return redirect("/cart/")
         
