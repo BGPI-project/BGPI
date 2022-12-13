@@ -70,9 +70,10 @@ def buy(request):
         totalPriceBike += bikeInCart.bike.precio
     total = totalPriceComponent + totalPriceBike
 
-
-
-    return render(request, 'pages/buy.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': total});
+    order = Order(user=request.user, precio=total)
+    order.save()
+    
+    return render(request, 'pages/buy.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': total})
 
 @login_required
 def index(request):
@@ -331,6 +332,10 @@ def deleteBike(request, bike_id):
         tabla.delete()
     BikesInCart.objects.get(bike = Bike.objects.get(id=bike_id)).delete()
     Bike.objects.get(id=bike_id).delete()
+    return redirect("/cart/")
+
+def deleteComponent(request, component_id):
+    ComponentsInCart.objects.get(component = Component.objects.get(id=component_id)).delete()
     return redirect("/cart/")
         
 

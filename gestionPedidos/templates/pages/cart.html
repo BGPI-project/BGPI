@@ -21,8 +21,8 @@
       <div class="col-md-8">
         <div class="card-body text-left">
           <h5 class="card-title">{{bikeInCart.bike.name}}</h5>
-          <p class="card-text">Cantidad</p>
-          <p class="card-text">Precio: {{bikeInCart.bike.precio}} €</p>
+          <p class="card-text">Amount</p>
+          <p class="card-text">Price: {{bikeInCart.bike.precio}} €</p>
           <a href="/configureBike/{{ bikeInCart.bike.id }}/">
             <button name="edit" type="button" class="btn btn-sm bg-gradient-primary">Edit</button>
           </a>
@@ -49,10 +49,10 @@
       <div class="col-md-8">
         <div class="card-body text-left">
           <h5 class="card-title">{{componentInCart.component.name}}</h5>
-          <p class="card-text">Cantidad</p>
-          <p class="card-text">Precio: {{componentInCart.component.precio}} €</p>
-          <a href="/configureBike/{{ bikeInCart.bike.id }}/">
-            <button name="edit" type="button" class="btn btn-sm bg-gradient-secondary">Edit</button>
+          <p class="card-text">Amount</p>
+          <p class="card-text">Price: {{componentInCart.component.precio}} €</p>
+          <a href="/deleteComponent/{{ componentInCart.component.id }}/">
+            <button name="delete" type="button" class="btn btn-sm bg-gradient-secondary">Delete</button>
           </a>
         </div>
       </div>
@@ -67,7 +67,7 @@
 
 <div class="card position-absolute top-50 end-0 translate-middle-y me-12" style="width: 20rem;">
   <div class="card-body">
-    <h5 class="card-title">Pedidos</h5>
+    <h5 class="card-title">Orders</h5>
     {% for bikeInCart in bikesInCart %}
 
       <!-- <div class="start-0 translate-middle-y">
@@ -107,7 +107,7 @@
     </div>
     <br>
 
-    <a href="buy" class="btn btn-primary">Pagar</a>
+    <a href="buy/" class="btn btn-primary">Pay</a>
   </div>
 </div>
 

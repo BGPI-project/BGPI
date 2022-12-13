@@ -8,7 +8,7 @@
 {% block body_class %} index-page {% endblock body_class %}
 
 
-{% block contentTitle %} RESUMEN DEL PEDIDO {% endblock contentTitle %}
+{% block contentTitle %} Sumary {% endblock contentTitle %}
 
 
 {% block content %}
@@ -55,52 +55,52 @@
 
 </div>
 
-<h1 style="color: white;">1. Dirección de envío</h1>
+<h1 style="color: white;">1. Address</h1>
 <div class="card mb-3 mt-3 pt-2 ps-2 pe-5">
 
     <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Nombre completo</span>
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Full name</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Dirección</span>
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Address</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Ciudad</span>
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">City</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Código postal</span>
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Postal code</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Número de teléfono</span>
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Phone number</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
     
 </div>
 
-<h1 style="color: white;">2. Método de pago</h1>
+<!--<h1 style="color: white;">2. Payment options</h1>
 <div class="card mb-3 mt-3 pt-2 ps-2 pe-5">
     <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Número de tarjeta</span>
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Credit card number</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
     
       <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Fecha de caducidad</span>
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Expiration date</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="02/22">
       </div>
 
 
 
     
-</div>
+</div>-->
 
-<h1 style="color: white;">3. Tramitar pedido</h1>
+<h1 style="color: white;">3. Order</h1>
 
-<a href="#" class="btn btn-primary">Pagar</a>
+<a href="/payments/create-checkout-session/" class="btn btn-primary">Pay</a>
 
 
 
