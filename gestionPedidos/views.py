@@ -316,7 +316,6 @@ def inventory(request):
 def search(request):
     if request.method=='POST':
         busqueda= request.POST['buscar']
-        print("algo")
         print(busqueda)
         products=Component.objects.filter(name__contains = busqueda) 
         print(products)

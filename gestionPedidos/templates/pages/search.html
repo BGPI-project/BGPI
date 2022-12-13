@@ -23,10 +23,13 @@
   placeholder="Search components" arial-label="Search"
   name="buscar">
   <button class="btn btn-outline-secundary" type="submit">
-  Search</button
+  Search</button>
 </form>
 </div>
-<form method="post" action="" role="form">
+
+
+
+<form method="POST" action="{% url 'inventory' %}" role="form">
 
     {% csrf_token %}
     <div id="list">
