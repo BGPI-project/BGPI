@@ -37,3 +37,12 @@ input[type="checkbox"]:checked + label {
     top: 50%;
     transform: translateY(-50%);
 }
+.labelInventory{
+    left: 20%;
+}
+.imagenInv{
+    width: 110px;
+    height: 90px;
+    display: flex;
+    margin-top: 50%;
+}

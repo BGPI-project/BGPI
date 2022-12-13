@@ -15,19 +15,19 @@ class Component(models.Model):
 
 
     ND='No definido'
-    SL='Sillin'
-    RD='Ruedas'
-    MN='Manillar'
-    CR='Cámara rueda'
-    CB='Cuadro de la bici'
+    SL='SL'
+    RD='RD'
+    MN='MN'
+    CR='CR'
+    CB='CB'
 
     TYPE= (
         (ND,'No definido'),
-        (SL,'Sillin'),
-        (RD,'Ruedas'),
-        (MN,'Manillar'),
-        (CR,'Cámara rueda'),
-        (CB,'Cuadro de la bici'),
+        (SL,'SL'),
+        (RD,'RD'),
+        (MN,'MN'),
+        (CR,'CR'),
+        (CB,'CB'),
         )
 
     type_component = models.CharField(
@@ -41,7 +41,7 @@ class Component(models.Model):
 class Bike(models.Model):
     name=models.CharField(max_length=30)
     precio=models.DecimalField(max_digits=7, decimal_places=2, default=0)
-    # image = models.CharField(max_length=200, null=True)
+    image = models.CharField(max_length=200, null=True)
 
     
 
