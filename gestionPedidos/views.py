@@ -69,9 +69,10 @@ def buy(request):
         totalPriceBike += bikeInCart.bike.precio
     total = totalPriceComponent + totalPriceBike
 
-
-
-    return render(request, 'pages/buy.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': total});
+    order = Order(user=request.user, precio=total)
+    order.save()
+    
+    return render(request, 'pages/buy.html', {'componentsInCart': componentsInCart, 'bikesInCart': bikesInCart, 'precioTotal': total})
 
 @login_required
 def index(request):
