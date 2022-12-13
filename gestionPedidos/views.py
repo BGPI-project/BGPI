@@ -8,7 +8,6 @@ from django.urls import reverse
 from gestionPedidos.models import Component
 from decouple import config
 import stripe
-from django.db.models import Q
 
 stripe.api_key = config("STRIPE_SECRET_KEY")
 
@@ -312,21 +311,6 @@ def inventory(request):
             return redirect("/cart/")
     return render(request, "pages/inventory.html", diccionario)
 
-
-
-@login_required
-def search(request):
-    if request.method=='POST':
-        busqueda= request.POST['buscar']
-        print(busqueda)
-        products=Component.objects.filter(name__contains = busqueda) 
-        print(products)
-        return render(request,"pages/search.html",{'products':products})
-        
-    else:
-        return render(request,"pages/search.html",{}) 
-
-
 def deleteBike(request, bike_id):
     for tabla in ComponentBike.objects.filter(bike = Bike.objects.get(id=bike_id)):
         tabla.delete()
@@ -338,4 +322,3 @@ def deleteComponent(request, component_id):
     ComponentsInCart.objects.get(component = Component.objects.get(id=component_id)).delete()
     return redirect("/cart/")
         
-
