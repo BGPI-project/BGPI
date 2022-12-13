@@ -80,7 +80,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6" style="text-align: start;">{{bikeInCart.bike.name}}</div>
-        <div class="col-6" style="text-align: end;">{{bikeInCart.bike.precio}}€</div>
+        <div class="col-6" style="text-align: end;">{{bikeInCart.bike.precio}} €</div>
       </div>
     </div>
 
@@ -92,7 +92,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6" style="text-align: start;">{{componentInCart.component.name}}</div>
-        <div class="col-6" style="text-align: end;">{{componentInCart.component.precio}}€</div>
+        <div class="col-6" style="text-align: end;">{{componentInCart.component.precio}} €</div>
       </div>
     </div>
     {% endfor %}
@@ -102,12 +102,13 @@
       <div class="row">
         <div class="col-6" style="text-align: start;">Total</div>
 
-        <div class="col-6" style="text-align: end;">{{precioTotal}}</div>
+        <div class="col-6" style="text-align: end;">{{precioTotal}} €</div>
       </div>
     </div>
     <br>
-
-    <a href="buy/" class="btn btn-primary">Pay</a>
+    {% if precioTotal != 0 %}
+      <a href="buy/" class="btn btn-primary">Pay</a>
+    {% endif %}
   </div>
 </div>
 

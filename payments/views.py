@@ -8,7 +8,7 @@ from django.views.generic.base import TemplateView
 import json
 import stripe
 
-from gestionPedidos.models import Order
+from gestionPedidos.models import Order, BikesInCart, ComponentsInCart, Cart
 
 class HomePageView(TemplateView):
     template_name = 'redirect_STRIPE.html'
@@ -71,6 +71,16 @@ def success_view(request):
         order.delete()
     else:
         return redirect("/cart/buy/")
+    
+    carrito = Cart.objects.get(user=request.user)
+
+    bicis = BikesInCart.objects.filter(cart=carrito)
+    for bici in bicis:
+        bici.delete()
+    
+    componentes = ComponentsInCart.objects.filter(cart=carrito)
+    for componente in componentes:
+        componente.delete()
 
     return render(request, template_name)
 

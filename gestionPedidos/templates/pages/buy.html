@@ -28,55 +28,51 @@
         </div>
         <div class="col-md-4 ms-3 text-end me-3">
             <div class="mb-2 mt-2">
-                {{componentInCart.component.precio}}€
+                {{componentInCart.component.precio}} €
             </div>
             <div class="mb-2 mt-2">
-                {{bikeInCart.bike.precio}}€
+                {{bikeInCart.bike.precio}} €
             </div>
         </div>
         
     </div>
-
-
-
     {% endfor %}
-
-
     {% endfor %}
     <div class="row justify-content-between mt-4">
         <div class="col-md-4 ms-3 text-start">
             Total
         </div>
         <div class="col-md-4 ms-3 text-end me-3">
-            {{precioTotal}}€
+            {{precioTotal}} €
         </div>
     </div>
+    <div class="row justify-content-between mt-4"></div>
 
 
 </div>
 
-<h1 style="color: white;">1. Address</h1>
+<h1 style="color: white;">Address</h1>
 <div class="card mb-3 mt-3 pt-2 ps-2 pe-5">
 
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Full name</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Address</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">City</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Postal code</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Phone number</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
     
 </div>
@@ -98,9 +94,12 @@
     
 </div>-->
 
-<h1 style="color: white;">3. Order</h1>
+{% if precioTotal != 0 %}
+    <h1 style="color: white;">Order</h1>
+    <a href="/payments/create-checkout-session/" class="btn btn-primary">Pay</a>
+{% endif %}
 
-<a href="/payments/create-checkout-session/" class="btn btn-primary">Pay</a>
+
 
 
 
