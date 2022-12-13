@@ -1,28 +1,6 @@
 # [BGPI]
 
 
-
-## ✨ Start the app in Docker
-
-> 👉 **Step 1** - Download the code from the GH repository (using `GIT`) 
-
-```bash
-$ git clone https://github.com/app-generator/django-soft-ui-design.git
-$ cd django-soft-ui-design
-```
-
-<br />
-
-> 👉 **Step 2** - Start the APP in `Docker`
-
-```bash
-$ docker-compose up --build 
-```
-
-Visit `http://localhost:5085` in your browser. The app should be up & running.
-
-<br />
-
 ## ✨ How to use it
 
 > Download the code 
