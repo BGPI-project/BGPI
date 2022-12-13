@@ -23,7 +23,7 @@ urlpatterns = [
     path('deleteComponent/<int:component_id>/<int:cart_id>/', deleteComponent, name='deleteComponent'),
     path('payments/', include('payments.urls'), name='stripe'),
     path('', index, name='index'),
-
+    path('politics/', politics, name='politics'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

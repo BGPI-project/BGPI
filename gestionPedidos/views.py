@@ -81,6 +81,13 @@ def index(request):
 
     return render(request, 'pages/index.html',{'usuario':usuario})
 
+
+@login_required
+def politics(request):
+    usuario=request.user
+
+    return render(request, 'pages/politics.html',{'usuario':usuario})
+
 def pages(request):
     context = {}
     # All resource paths end in .html.
