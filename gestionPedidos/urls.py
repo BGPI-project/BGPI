@@ -18,7 +18,7 @@ urlpatterns = [
     path('inventory/', inventory, name='inventory'),
     path('cart/buy', buy, name='buy'),
     path('search/', search, name='search'),
-
+    path('deleteBike/<int:bike_id>/', deleteBike, name='deleteBike'),
     path('', index, name='index'),
 
 ]

@@ -16,7 +16,7 @@ stripe.api_key = config("STRIPE_SECRET_KEY")
 
 from django import forms
 
-login_required
+@login_required
 def showCart(request):
 
     cart = Cart.objects.filter(user=request.user)
@@ -312,6 +312,7 @@ def inventory(request):
     return render(request, "pages/inventory.html", diccionario)
 
 
+
 @login_required
 def search(request):
     if request.method=='POST':
@@ -323,4 +324,13 @@ def search(request):
         
     else:
         return render(request,"pages/search.html",{}) 
+
+
+def deleteBike(request, bike_id):
+    for tabla in ComponentBike.objects.filter(bike = Bike.objects.get(id=bike_id)):
+        tabla.delete()
+    BikesInCart.objects.get(bike = Bike.objects.get(id=bike_id)).delete()
+    Bike.objects.get(id=bike_id).delete()
+    return redirect("/cart/")
+        
 
