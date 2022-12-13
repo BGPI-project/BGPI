@@ -19,7 +19,7 @@ urlpatterns = [
     path('cart/buy/', buy, name='buy'),
     path('deleteBike/<int:bike_id>/', deleteBike, name='deleteBike'),
     path('deleteComponent/<int:component_id>/', deleteComponent, name='deleteComponent'),
-    path('payments/', include('Payments.urls'), name='stripe'),
+    path('payments/', include('payments.urls'), name='stripe'),
 
     path('', index, name='index'),
 
