@@ -51,7 +51,7 @@
           <h5 class="card-title">{{componentInCart.component.name}}</h5>
           <p class="card-text">Amount</p>
           <p class="card-text">Price: {{componentInCart.component.precio}} €</p>
-          <a href="/deleteComponent/{{ componentInCart.component.id }}/">
+          <a href="/deleteComponent/{{ componentInCart.component.id }}/{{ componentInCart.cart_id }}/">
             <button name="delete" type="button" class="btn btn-sm bg-gradient-secondary">Delete</button>
           </a>
         </div>
