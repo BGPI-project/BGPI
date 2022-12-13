@@ -1,18 +1,18 @@
-FROM python:3.9
+FROM python:3.11.1-alpine3.17
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
 
-COPY requirements.txt .
-# install python dependencies
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /app
 
-COPY . .
 
-# running migrations
-RUN python manage.py migrate
+RUN apk update \
+    && apk add --no-cache gcc musl-dev python3-dev libffi-dev \
+    && pip install --upgrade pip
 
-# gunicorn
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
+COPY ./requirements.txt ./
+
+RUN pip install -r requirements.txt
+
+COPY ./ ./
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

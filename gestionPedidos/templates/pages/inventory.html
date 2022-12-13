@@ -1,0 +1,146 @@
+{% extends 'layouts/pedidosBase.html' %}
+
+{% block title %} Inventory {% endblock title %}
+
+{% block body_class %} index-page {% endblock body_class %}
+
+{% block contentTitle %} Inventory {% endblock contentTitle %}
+
+{% load static %}
+
+{% block stylesheets %}
+<link type="text/css" rel="stylesheet" href="{% static 'pages/styles.css' %}" />
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<div class="row d-flex justify-content-around text-center">
+  <form class="d-flex" method="POST" action="{% url 'search' %}">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search"
+    placeholder="Search components" arial-label="Search"
+    name="buscar">
+    <button class="btn btn-outline-secundary" type="submit">
+    Search</button>
+  </form>
+</div>
+
+
+
+<form method="post" action="{% url 'inventory' %}" role="form" >
+
+  {% csrf_token %}
+  <div id="list">
+    <div class="row d-flex justify-content-around text-center">
+      {% for cuadro in cuadros %}
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="{{cuadro.image}}" class="imagenInv">
+          </div>
+          <div class="col-md-7">
+            <input type="checkbox" id="{{ cuadro.id }}" name="componentes" value="{{ cuadro.id }}" class="botonRadio">
+            <label for="{{ cuadro.id }}">
+              <div class="col-md-6 labelText labelInventory">name: {{ cuadro.name }} <br> price: {{ cuadro.precio }} <br> description: {{cuadro.description}}</div>
+            </label>
+            <br>
+          </div>
+        </div>
+      </div>
+        <div class="col-md-1"></div>
+      {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-around text-center">
+      {% for manillar in manillares %}
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{manillar.image}}" class="imagenInv">
+        </div>
+        <div class="col-md-7">
+          <input type="checkbox" id="{{ manillar.id }}" name="componentes" value="{{ manillar.id }}" class="botonRadio">
+          <label for="{{ manillar.id }}">
+            <div class="col-md-6 labelText labelInventory">name: {{ manillar.name }} <br> price: {{ manillar.precio }} <br> description: {{manillar.description}}</div>
+          </label>
+          <br>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-1"></div>
+      {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-around text-center">
+      {% for sillin in sillines %}
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{sillin.image}}" class="imagenInv">
+        </div>
+        <div class="col-md-7">
+          <input type="checkbox" id="{{ sillin.id }}" name="componentes" value="{{ sillin.id }}" class="botonRadio">
+          <label for="{{ sillin.id }}">
+            <div class="col-md-6 labelText labelInventory">name: {{ sillin.name }} <br> price: {{ sillin.precio }} <br> description: {{sillin.description}}</div>
+          </label>
+          <br>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-1"></div>
+      {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-around text-center">
+      {% for rueda in ruedas %}
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{rueda.image}}" class="imagenInv">
+        </div>
+        <div class="col-md-7">
+          <input type="checkbox" id="{{ rueda.id }}" name="componentes" value="{{ rueda.id }}" class="botonRadio">
+          <label for="{{ rueda.id }}">
+            <div class="col-md-6 labelText labelInventory">name: {{ rueda.name }} <br> price: {{ rueda.precio }} <br> description: {{rueda.description}}</div>
+          </label>
+          <br>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-1"></div>
+      {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-around text-center">
+      {% for camara in camaras %}
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{camara.image}}" class="imagenInv">
+        </div>
+        <div class="col-md-7">
+          <input type="checkbox" id="{{ camara.id }}" name="componentes" value="{{ camara.id }}" class="botonRadio">
+          <label for="{{ camara.id }}">
+            <div class="col-md-6 labelText labelInventory">name: {{ camara.name }} <br> price: {{ camara.precio }} <br> description: {{camara.description}}</div>
+          </label>
+          <br>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-1"></div>
+      {% endfor %}
+    </div>
+
+    <div class="row d-flex justify-content-around text-center">
+      <div class="col-md">
+        <button type="submit" name="Add" class="btn btn-lg bg-gradient-primary btn-lg w-75 mt-4 mb-0" style="margin-left: 28px;">Add</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+{% endblock content %}

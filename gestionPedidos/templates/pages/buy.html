@@ -1,0 +1,108 @@
+
+{% extends 'layouts/pedidosBase.html' %}
+
+
+{% block title %} BUY {% endblock title %}
+
+
+{% block body_class %} index-page {% endblock body_class %}
+
+
+{% block contentTitle %} Sumary {% endblock contentTitle %}
+
+
+{% block content %}
+
+<div class="card mb-3">
+    {% for componentInCart in componentsInCart %}
+    {% for bikeInCart in bikesInCart %}
+
+    <div class="row justify-content-between">
+        <div class="col-md-4 ms-3 text-start">
+            <div class="mb-2 mt-2">
+                {{componentInCart.component.name}}
+            </div>
+            <div class="mb-2 mt-2">
+                {{bikeInCart.bike.name}}
+            </div>
+        </div>
+        <div class="col-md-4 ms-3 text-end me-3">
+            <div class="mb-2 mt-2">
+                {{componentInCart.component.precio}} €
+            </div>
+            <div class="mb-2 mt-2">
+                {{bikeInCart.bike.precio}} €
+            </div>
+        </div>
+        
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <div class="row justify-content-between mt-4">
+        <div class="col-md-4 ms-3 text-start">
+            Total
+        </div>
+        <div class="col-md-4 ms-3 text-end me-3">
+            {{precioTotal}} €
+        </div>
+    </div>
+    <div class="row justify-content-between mt-4"></div>
+
+
+</div>
+
+<h1 style="color: white;">Address</h1>
+<div class="card mb-3 mt-3 pt-2 ps-2 pe-5">
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Full name</span>
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Address</span>
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">City</span>
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Postal code</span>
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Phone number</span>
+        <input required type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    
+</div>
+
+<!--<h1 style="color: white;">2. Payment options</h1>
+<div class="card mb-3 mt-3 pt-2 ps-2 pe-5">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Credit card number</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: whitesmoke;">Expiration date</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="02/22">
+      </div>
+
+
+
+    
+</div>-->
+
+{% if precioTotal != 0 %}
+    <h1 style="color: white;">Order</h1>
+    <a href="/payments/create-checkout-session/" class="btn btn-primary">Pay</a>
+{% endif %}
+
+
+
+
+
+{% endblock content %}
+
+    

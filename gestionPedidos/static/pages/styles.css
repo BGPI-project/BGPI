@@ -1,0 +1,48 @@
+#nameLabel {
+    color: white;
+}
+
+input[type=radio] {
+    opacity: 0;
+}
+
+input[type="radio"] + label {
+    height: 80px;
+    width: 120%;
+    background-color: white;
+    border-radius: 0.5em;
+}
+
+input[type="radio"]:checked + label {
+    background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
+    color: white;
+}
+input[type=checkbox] {
+    opacity: 0;
+}
+
+input[type="checkbox"] + label {
+    height: 150px;
+    width: 120%;
+    background-color: white;
+    border-radius: 0.5em;
+}
+
+input[type="checkbox"]:checked + label {
+    background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
+    color: white;
+}
+.labelText {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.labelInventory{
+    left: 20%;
+}
+.imagenInv{
+    width: 110px;
+    height: 90px;
+    display: flex;
+    margin-top: 50%;
+}
